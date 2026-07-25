@@ -9,22 +9,25 @@ const CustomersPage = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:3000/customers")
-      .then((response) => {
+    const getCustomers = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/customers");
+
         if (!response.ok) {
           throw new Error("Error al obtener clientes");
         }
-        return response.json();
-      })
-      .then((data) => {
+
+        const data = await response.json();
+
         setCustomers(data.data);
-      })
-      .catch((error) => {
+      } catch (error) {
         setError(error.message);
-      })
-      .finally(() => {
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    getCustomers();
   }, []);
 
   return (
