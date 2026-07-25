@@ -1,32 +1,10 @@
 import { UserPlus } from "lucide-react";
 import Header from "../component/Header";
 import QuickActions from "../component/QuickActions";
-import { useEffect, useState } from "react";
-import { getCustomers } from "../services/customerService";
-import type { Customer } from "../types/customer";
+import { useCustomers } from "../hooks/useCustomers";
 
 const CustomersPage = () => {
-  const [customers, setCustomers] = useState<Customer[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const loadCustomers = async () => {
-      try {
-        const data = await getCustomers();
-
-        setCustomers(data);
-      } catch (error) {
-        if (error instanceof Error) {
-          setError(error.message);
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadCustomers();
-  }, []);
+  const { customers, loading, error } = useCustomers();
 
   return (
     <main className="space-y-8">
