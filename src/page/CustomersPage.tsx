@@ -3,11 +3,12 @@ import Header from "../component/Header";
 import QuickActions from "../component/QuickActions";
 import { useEffect, useState } from "react";
 import { getCustomers } from "../services/customerService";
+import type { Customer } from "../types/customer";
 
 const CustomersPage = () => {
-  const [customers, setCustomers] = useState([]);
+  const [customers, setCustomers] = useState<Customer[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const loadCustomers = async () => {
@@ -16,7 +17,9 @@ const CustomersPage = () => {
 
         setCustomers(data);
       } catch (error) {
-        setError(error.message);
+        if (error instanceof Error) {
+          setError(error.message);
+        }
       } finally {
         setLoading(false);
       }

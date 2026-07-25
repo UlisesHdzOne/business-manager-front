@@ -1,4 +1,6 @@
-export const getCustomers = async () => {
+import type { Customer } from "../types/customer";
+
+export const getCustomers = async (): Promise<Customer[]> => {
   const response = await fetch("http://localhost:3000/customers");
 
   if (!response.ok) {
