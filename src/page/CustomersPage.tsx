@@ -5,12 +5,25 @@ import { useEffect, useState } from "react";
 
 const CustomersPage = () => {
   const [customers, setCustomers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:3000/customers")
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error al obtener clientes");
+        }
+        return response.json();
+      })
       .then((data) => {
         setCustomers(data.data);
+      })
+      .catch((error) => {
+        setError(error.message);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
 
@@ -28,14 +41,22 @@ const CustomersPage = () => {
         links={[{ label: "Crear Cliente", icon: UserPlus, to: "/customers" }]}
       />
 
-      <div>
-        {customers.map((customer) => (
-          <div key={customer.id}>
-            <h2>{customer.firstName}</h2>
-            <p>{customer.lastName}</p>
-          </div>
-        ))}
-      </div>
+      {loading && <p>Cargando ... Clientes</p>}
+      {error && (
+        <p className="text-red-600">
+          Ha ocurrido un error al cargar clientes: {error}
+        </p>
+      )}
+      {!loading && !error && (
+        <section>
+          {customers.map((customer) => (
+            <div key={customer.id}>
+              <h2>{customer.firstName}</h2>
+              <p>{customer.lastName}</p>
+            </div>
+          ))}
+        </section>
+      )}
     </main>
   );
 };
