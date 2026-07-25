@@ -18,9 +18,7 @@ const Navbar = () => {
         </div>
 
         {/* Usuario */}
-        <div className="text-sm">
-          Admin
-        </div>
+        <div className="text-sm">Admin</div>
       </nav>
     </header>
   );
