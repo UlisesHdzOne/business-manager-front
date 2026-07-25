@@ -1,8 +1,10 @@
+import HomePage from "./page/HomePage";
+
 function App() {
   return (
-    <>
-      <h1 className="bg-blue-400">Business Manager </h1>
-    </>
+    <div>
+      <HomePage />
+    </div>
   );
 }
 
