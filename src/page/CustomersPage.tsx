@@ -2,6 +2,7 @@ import { UserPlus } from "lucide-react";
 import Header from "../component/Header";
 import QuickActions from "../component/QuickActions";
 import { useCustomers } from "../hooks/useCustomers";
+import CustomerList from "../component/CustomerList";
 
 const CustomersPage = () => {
   const { customers, loading, error } = useCustomers();
@@ -35,14 +36,7 @@ const CustomersPage = () => {
       )}
 
       {!loading && !error && customers.length > 0 && (
-        <section>
-          {customers.map((customer) => (
-            <div key={customer.id}>
-              <h2>{customer.firstName}</h2>
-              <p>{customer.lastName}</p>
-            </div>
-          ))}
-        </section>
+        <CustomerList customers={customers} />
       )}
     </main>
   );
