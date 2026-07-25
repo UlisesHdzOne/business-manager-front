@@ -2,6 +2,7 @@ import { UserPlus } from "lucide-react";
 import Header from "../component/Header";
 import QuickActions from "../component/QuickActions";
 import { useEffect, useState } from "react";
+import { getCustomers } from "../services/customerService";
 
 const CustomersPage = () => {
   const [customers, setCustomers] = useState([]);
@@ -9,17 +10,11 @@ const CustomersPage = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const getCustomers = async () => {
+    const loadCustomers = async () => {
       try {
-        const response = await fetch("http://localhost:3000/customers");
+        const data = await getCustomers();
 
-        if (!response.ok) {
-          throw new Error("Error al obtener clientes");
-        }
-
-        const data = await response.json();
-
-        setCustomers(data.data);
+        setCustomers(data);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -27,7 +22,7 @@ const CustomersPage = () => {
       }
     };
 
-    getCustomers();
+    loadCustomers();
   }, []);
 
   return (
