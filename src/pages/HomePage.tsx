@@ -1,6 +1,6 @@
 import { FileText, ShoppingCart, UserPlus } from "lucide-react";
-import Header from "../component/Header";
-import QuickActions from "../component/QuickActions";
+import Header from "../components/Header";
+import QuickActions from "../components/QuickActions";
 
 const HomePage = () => {
   return (

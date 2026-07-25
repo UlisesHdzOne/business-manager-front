@@ -1,4 +1,4 @@
-import type { ApiResponse } from "../types/api";
+import type { ApiResponse } from "../../../types/api";
 import type { Customer } from "../types/customer";
 
 export const getCustomers = async (): Promise<Customer[]> => {

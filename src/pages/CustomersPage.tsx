@@ -1,8 +1,8 @@
 import { UserPlus } from "lucide-react";
-import Header from "../component/Header";
-import QuickActions from "../component/QuickActions";
-import { useCustomers } from "../hooks/useCustomers";
-import CustomerList from "../component/CustomerList";
+import Header from "../components/Header";
+import QuickActions from "../components/QuickActions";
+import { useCustomers } from "../features/customers/hooks/useCustomers";
+import CustomerList from "../features/customers/components/CustomerList";
 
 const CustomersPage = () => {
   const { customers, loading, error } = useCustomers();
