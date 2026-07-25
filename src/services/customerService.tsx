@@ -1,3 +1,4 @@
+import type { ApiResponse } from "../types/api";
 import type { Customer } from "../types/customer";
 
 export const getCustomers = async (): Promise<Customer[]> => {
@@ -7,7 +8,7 @@ export const getCustomers = async (): Promise<Customer[]> => {
     throw new Error("Error al obtener clientes");
   }
 
-  const data = await response.json();
+  const result: ApiResponse<Customer[]> = await response.json();
 
-  return data.data;
+  return result.data;
 };
